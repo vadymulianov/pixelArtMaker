@@ -2,10 +2,6 @@ $(function makeGrid() {
   // Variables
   var gridHeight;
   var gridWidth;
-  var table = $("#pixel_canvas");
-  var createGridButton = $("input[name='create']");
-  var refreshButton = $("input[name='refresh']")
-  var colorPicker = $("#colorPicker");
   var colorPickerValue;
 
   // Getting input value from Grid Height input field
@@ -19,7 +15,7 @@ $(function makeGrid() {
   });
 
   // Submitting the form and creating the table based on provided values
-  createGridButton.click(function(e) {
+  $("input[name='create']").click(function(e) {
 
     e.preventDefault();
 
@@ -28,28 +24,28 @@ $(function makeGrid() {
     for (var j = 0; j < gridWidth; j++) {
       tempString += "<td>*</td>";
       }
-      table.append("<tr>" + tempString + "</tr>");
+      $("#pixel_canvas").append("<tr>" + tempString + "</tr>");
     }
-    createGridButton.off("click");
+    $("input[name='create']").off("click");
   });
 
   // Refresh page
-  refreshButton.click(function() {
+  $("input[name='refresh']").click(function() {
       location.reload(true);
   })
 
   // Getting Color Picker Value Function
-  colorPicker.on("change", function() {
-    colorPickerValue = colorPicker.val();
+  $("#colorPicker").on("change", function() {
+    colorPickerValue = $("#colorPicker").val();
   });
 
   // Pixel drawning Function
-  table.on("click", "td", function() {
+  $("#pixel_canvas").on("click", "td", function() {
       $(this).css("background-color", colorPickerValue);
   });
 
   // Pixel removing function on doubleClick
-  table.on("dblclick", "td", function() {
+  $("#pixel_canvas").on("dblclick", "td", function() {
     $(this).css("background-color", "white");
   });
 
